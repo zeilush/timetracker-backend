@@ -1,0 +1,13 @@
+server:
+  port: 8080
+#  address: 0.0.0.0
+  tomcat:
+    accesslog:
+      enabled: true
+      directory: /home/wkss/devel/repos/timetracker-backend/logs
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: test

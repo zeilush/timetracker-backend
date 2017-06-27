@@ -1,9 +1,12 @@
+import javax.tools.JavaCompiler
+
 buildscript {
-    ext.kotlin_version = '1.1.2-5' // Required for Kotlin integration
+    ext.kotlin_version = '1.1.3' // Required for Kotlin integration
     ext.spring_boot_version = '1.5.4.RELEASE'
 
     repositories {
         jcenter()
+        mavenCentral()
     }
 
     dependencies {
@@ -14,38 +17,36 @@ buildscript {
 
 apply plugin: 'idea'
 apply plugin: 'kotlin' // Required for Kotlin integration
-//apply plugin: 'appengine'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'application'
 
 jar {
     baseName = 'timetracker-rest'
-    version = '0.1.0'
+    version = '1.0.0'
 }
 
 repositories {
     jcenter()
 }
 
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version" // Required for Kotlin integration
     compile 'org.springframework.boot:spring-boot-starter-web'
-//    classpath "com.google.appengine:gradle-appengine-plugin:1.9.49"
-//    appengineSdk "com.google.appengine:appengine-java-sdk:1.9.49"
-//    compile "com.google.endpoints:endpoints-framework:2.0.3"
+    compile 'org.springframework.boot:spring-boot-starter-data-mongodb'
+
+    //jackson
+    compile 'com.fasterxml.jackson.module:jackson-module-kotlin:2.8.9'
+    
+    //swagger
+    compile 'io.springfox:springfox-swagger2:2.7.0'
+    runtime 'io.springfox:springfox-swagger-ui:2.7.0'
+
     testCompile 'junit:junit'
 }
 
 springBoot {
     mainClass = 'de.zeilush.timetracker.Application'
 }
-
-//appengine {
-//    downloadSdk = true
-//    // Used to allow usage of debugger
-//    jvmFlags = ['-Xdebug', '-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000']
-//}
-
-//task wrapper(type: Wrapper) {
-//    gradleVersion = '2.9'
-//}
