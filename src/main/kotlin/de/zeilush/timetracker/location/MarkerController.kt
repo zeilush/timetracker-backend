@@ -21,7 +21,6 @@ class MarkerController(val markerRepo: MarkerRepository) {
         return markerRepo.save(marker)
     }
 
-    @PutMapping
     @RequestMapping(value = "{id}", method = arrayOf(RequestMethod.PUT))
     fun createMarker(@PathVariable("id") id: UUID, @RequestBody marker: MarkerDto): MarkerDto {
         val markerDb = markerRepo.findOne(id)
